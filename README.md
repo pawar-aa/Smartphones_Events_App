@@ -1,4 +1,6 @@
 # Evently - Event Booking and Hosting iOS Application
+<img src="https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/23-swift-1024.png" alt="Swift Logo" width="100" height="100" style="background-color: white;"> <img src="https://cdn0.iconfinder.com/data/icons/font-awesome-brands-vol-1/640/aws-512.png" alt="AWS Logo" width="100" height="100" style="background-color: white;"> <img src="https://cdn2.iconfinder.com/data/icons/amazon-aws-stencils/100/Database_copy_DynamoDB-512.png" alt="DynamoDB Logo" width="100" height="100" style="background-color: white;"> <img src="https://cdn1.iconfinder.com/data/icons/ionicons-fill-vol-1/512/logo-amplify-512.png" alt="Amplify Logo" width="100" height="100" style="background-color: white;">
+
 
 ## Overview
 
@@ -8,7 +10,7 @@ Evently is an iOS application designed for event booking and hosting, providing 
 
 - **Platform:** MacOS, iOS
 - **Languages:** Swift, SwiftUI, GraphQL
-- **Software:** XCode, Terminal
+- **Software:** XCode, Terminal, Amplify Studio
 - **Services:** AWS Cloud Console - Amplify, IAM, AppSync, DynamoDB
 
 ## Getting Started
