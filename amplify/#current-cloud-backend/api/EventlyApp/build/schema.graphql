@@ -1,0 +1,410 @@
+type EventTransactions @aws_iam @aws_api_key {
+  id: ID!
+  customerid: ID
+  eventid: String
+  numberoftickets: Int
+  subtotal: Float
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Events @aws_iam @aws_api_key {
+  id: ID!
+  eventname: String
+  eventdescription: String
+  eventdate: AWSDate
+  eventtimestart: AWSTime
+  eventtimeend: AWSTime
+  eventcity: String
+  totalnumberofseats: Int
+  ticketprice: Float
+  hostid: ID
+  leftnumberofseats: Int
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type UserDetail @aws_iam @aws_api_key {
+  id: ID!
+  username: String
+  password: String
+  usertype: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelEventTransactionsConnection @aws_api_key @aws_iam {
+  items: [EventTransactions]!
+  nextToken: String
+}
+
+input ModelEventTransactionsFilterInput {
+  id: ModelIDInput
+  customerid: ModelIDInput
+  eventid: ModelStringInput
+  numberoftickets: ModelIntInput
+  subtotal: ModelFloatInput
+  and: [ModelEventTransactionsFilterInput]
+  or: [ModelEventTransactionsFilterInput]
+  not: ModelEventTransactionsFilterInput
+}
+
+type Query {
+  getEventTransactions(id: ID!): EventTransactions @aws_api_key @aws_iam
+  listEventTransactions(filter: ModelEventTransactionsFilterInput, limit: Int, nextToken: String): ModelEventTransactionsConnection @aws_api_key @aws_iam
+  getEvents(id: ID!): Events @aws_api_key @aws_iam
+  listEvents(filter: ModelEventsFilterInput, limit: Int, nextToken: String): ModelEventsConnection @aws_api_key @aws_iam
+  getUserDetail(id: ID!): UserDetail @aws_api_key @aws_iam
+  listUserDetails(filter: ModelUserDetailFilterInput, limit: Int, nextToken: String): ModelUserDetailConnection @aws_api_key @aws_iam
+}
+
+input ModelEventTransactionsConditionInput {
+  customerid: ModelIDInput
+  eventid: ModelStringInput
+  numberoftickets: ModelIntInput
+  subtotal: ModelFloatInput
+  and: [ModelEventTransactionsConditionInput]
+  or: [ModelEventTransactionsConditionInput]
+  not: ModelEventTransactionsConditionInput
+}
+
+input CreateEventTransactionsInput {
+  id: ID
+  customerid: ID
+  eventid: String
+  numberoftickets: Int
+  subtotal: Float
+}
+
+input UpdateEventTransactionsInput {
+  id: ID!
+  customerid: ID
+  eventid: String
+  numberoftickets: Int
+  subtotal: Float
+}
+
+input DeleteEventTransactionsInput {
+  id: ID!
+}
+
+type Mutation {
+  createEventTransactions(input: CreateEventTransactionsInput!, condition: ModelEventTransactionsConditionInput): EventTransactions @aws_api_key @aws_iam
+  updateEventTransactions(input: UpdateEventTransactionsInput!, condition: ModelEventTransactionsConditionInput): EventTransactions @aws_api_key @aws_iam
+  deleteEventTransactions(input: DeleteEventTransactionsInput!, condition: ModelEventTransactionsConditionInput): EventTransactions @aws_api_key @aws_iam
+  createEvents(input: CreateEventsInput!, condition: ModelEventsConditionInput): Events @aws_api_key @aws_iam
+  updateEvents(input: UpdateEventsInput!, condition: ModelEventsConditionInput): Events @aws_api_key @aws_iam
+  deleteEvents(input: DeleteEventsInput!, condition: ModelEventsConditionInput): Events @aws_api_key @aws_iam
+  createUserDetail(input: CreateUserDetailInput!, condition: ModelUserDetailConditionInput): UserDetail @aws_api_key @aws_iam
+  updateUserDetail(input: UpdateUserDetailInput!, condition: ModelUserDetailConditionInput): UserDetail @aws_api_key @aws_iam
+  deleteUserDetail(input: DeleteUserDetailInput!, condition: ModelUserDetailConditionInput): UserDetail @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionEventTransactionsFilterInput {
+  id: ModelSubscriptionIDInput
+  customerid: ModelSubscriptionIDInput
+  eventid: ModelSubscriptionStringInput
+  numberoftickets: ModelSubscriptionIntInput
+  subtotal: ModelSubscriptionFloatInput
+  and: [ModelSubscriptionEventTransactionsFilterInput]
+  or: [ModelSubscriptionEventTransactionsFilterInput]
+}
+
+type Subscription {
+  onCreateEventTransactions(filter: ModelSubscriptionEventTransactionsFilterInput): EventTransactions @aws_subscribe(mutations: ["createEventTransactions"]) @aws_api_key @aws_iam
+  onUpdateEventTransactions(filter: ModelSubscriptionEventTransactionsFilterInput): EventTransactions @aws_subscribe(mutations: ["updateEventTransactions"]) @aws_api_key @aws_iam
+  onDeleteEventTransactions(filter: ModelSubscriptionEventTransactionsFilterInput): EventTransactions @aws_subscribe(mutations: ["deleteEventTransactions"]) @aws_api_key @aws_iam
+  onCreateEvents(filter: ModelSubscriptionEventsFilterInput): Events @aws_subscribe(mutations: ["createEvents"]) @aws_api_key @aws_iam
+  onUpdateEvents(filter: ModelSubscriptionEventsFilterInput): Events @aws_subscribe(mutations: ["updateEvents"]) @aws_api_key @aws_iam
+  onDeleteEvents(filter: ModelSubscriptionEventsFilterInput): Events @aws_subscribe(mutations: ["deleteEvents"]) @aws_api_key @aws_iam
+  onCreateUserDetail(filter: ModelSubscriptionUserDetailFilterInput): UserDetail @aws_subscribe(mutations: ["createUserDetail"]) @aws_api_key @aws_iam
+  onUpdateUserDetail(filter: ModelSubscriptionUserDetailFilterInput): UserDetail @aws_subscribe(mutations: ["updateUserDetail"]) @aws_api_key @aws_iam
+  onDeleteUserDetail(filter: ModelSubscriptionUserDetailFilterInput): UserDetail @aws_subscribe(mutations: ["deleteUserDetail"]) @aws_api_key @aws_iam
+}
+
+type ModelEventsConnection @aws_api_key @aws_iam {
+  items: [Events]!
+  nextToken: String
+}
+
+input ModelEventsFilterInput {
+  id: ModelIDInput
+  eventname: ModelStringInput
+  eventdescription: ModelStringInput
+  eventdate: ModelStringInput
+  eventtimestart: ModelStringInput
+  eventtimeend: ModelStringInput
+  eventcity: ModelStringInput
+  totalnumberofseats: ModelIntInput
+  ticketprice: ModelFloatInput
+  hostid: ModelIDInput
+  leftnumberofseats: ModelIntInput
+  and: [ModelEventsFilterInput]
+  or: [ModelEventsFilterInput]
+  not: ModelEventsFilterInput
+}
+
+input ModelEventsConditionInput {
+  eventname: ModelStringInput
+  eventdescription: ModelStringInput
+  eventdate: ModelStringInput
+  eventtimestart: ModelStringInput
+  eventtimeend: ModelStringInput
+  eventcity: ModelStringInput
+  totalnumberofseats: ModelIntInput
+  ticketprice: ModelFloatInput
+  hostid: ModelIDInput
+  leftnumberofseats: ModelIntInput
+  and: [ModelEventsConditionInput]
+  or: [ModelEventsConditionInput]
+  not: ModelEventsConditionInput
+}
+
+input CreateEventsInput {
+  id: ID
+  eventname: String
+  eventdescription: String
+  eventdate: AWSDate
+  eventtimestart: AWSTime
+  eventtimeend: AWSTime
+  eventcity: String
+  totalnumberofseats: Int
+  ticketprice: Float
+  hostid: ID
+  leftnumberofseats: Int
+}
+
+input UpdateEventsInput {
+  id: ID!
+  eventname: String
+  eventdescription: String
+  eventdate: AWSDate
+  eventtimestart: AWSTime
+  eventtimeend: AWSTime
+  eventcity: String
+  totalnumberofseats: Int
+  ticketprice: Float
+  hostid: ID
+  leftnumberofseats: Int
+}
+
+input DeleteEventsInput {
+  id: ID!
+}
+
+input ModelSubscriptionEventsFilterInput {
+  id: ModelSubscriptionIDInput
+  eventname: ModelSubscriptionStringInput
+  eventdescription: ModelSubscriptionStringInput
+  eventdate: ModelSubscriptionStringInput
+  eventtimestart: ModelSubscriptionStringInput
+  eventtimeend: ModelSubscriptionStringInput
+  eventcity: ModelSubscriptionStringInput
+  totalnumberofseats: ModelSubscriptionIntInput
+  ticketprice: ModelSubscriptionFloatInput
+  hostid: ModelSubscriptionIDInput
+  leftnumberofseats: ModelSubscriptionIntInput
+  and: [ModelSubscriptionEventsFilterInput]
+  or: [ModelSubscriptionEventsFilterInput]
+}
+
+type ModelUserDetailConnection @aws_api_key @aws_iam {
+  items: [UserDetail]!
+  nextToken: String
+}
+
+input ModelUserDetailFilterInput {
+  id: ModelIDInput
+  username: ModelStringInput
+  password: ModelStringInput
+  usertype: ModelStringInput
+  and: [ModelUserDetailFilterInput]
+  or: [ModelUserDetailFilterInput]
+  not: ModelUserDetailFilterInput
+}
+
+input ModelUserDetailConditionInput {
+  username: ModelStringInput
+  password: ModelStringInput
+  usertype: ModelStringInput
+  and: [ModelUserDetailConditionInput]
+  or: [ModelUserDetailConditionInput]
+  not: ModelUserDetailConditionInput
+}
+
+input CreateUserDetailInput {
+  id: ID
+  username: String
+  password: String
+  usertype: String
+}
+
+input UpdateUserDetailInput {
+  id: ID!
+  username: String
+  password: String
+  usertype: String
+}
+
+input DeleteUserDetailInput {
+  id: ID!
+}
+
+input ModelSubscriptionUserDetailFilterInput {
+  id: ModelSubscriptionIDInput
+  username: ModelSubscriptionStringInput
+  password: ModelSubscriptionStringInput
+  usertype: ModelSubscriptionStringInput
+  and: [ModelSubscriptionUserDetailFilterInput]
+  or: [ModelSubscriptionUserDetailFilterInput]
+}

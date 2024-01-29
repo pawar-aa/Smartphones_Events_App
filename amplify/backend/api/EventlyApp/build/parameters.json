@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "EventlyApp",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-eventlyapp-staging-235945-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/acafa7e60ab5943a67a4cb3615dc8b097c10f2b1"
+}

@@ -1,0 +1,28 @@
+type EventTransactions @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  customerid: ID
+  eventid: String
+  numberoftickets: Int
+  subtotal: Float
+}
+
+type Events @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  eventname: String
+  eventdescription: String
+  eventdate: AWSDate
+  eventtimestart: AWSTime
+  eventtimeend: AWSTime
+  eventcity: String
+  totalnumberofseats: Int
+  ticketprice: Float
+  hostid: ID
+  leftnumberofseats: Int
+}
+
+type UserDetail @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String
+  password: String
+  usertype: String
+}
